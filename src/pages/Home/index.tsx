@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSnapshot } from "valtio";
@@ -8,12 +8,44 @@ import states from "../../states";
 const HomePage = () => {
     let navigate = useNavigate();
     const { search } = useSnapshot(states);
+    const [errors, setErrors] = useState<any>();
+
+    const fetchMovie = async (title: string) => {
+        const response = await fetch(
+            `http://www.omdbapi.com/?apikey=${
+                import.meta.env.VITE_OMDb_API_KEY
+            }&t=${title}`
+        );
+
+        const jsonResults = await response.json();
+        return jsonResults;
+    };
+
+    const getMovie = async () => {
+        try {
+            const movie = await fetchMovie(search);
+            states.movieToBeFetched = movie;
+
+            setErrors(movie.Error);
+        } catch (err: any) {
+            toast.error(err.message);
+        }
+    };
+
+    useEffect(() => {
+        getMovie();
+    }, [search]);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!search) {
             toast.error("Please, provide a movie or serie title");
+            return;
+        }
+
+        if (errors) {
+            toast.error(errors);
             return;
         }
         navigate("/results");
