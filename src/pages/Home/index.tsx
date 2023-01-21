@@ -5,6 +5,7 @@ import { useSnapshot } from "valtio";
 import { InputGroup } from "../../components/InputGroup";
 import { OMDb_API_KEY } from "../../constants/keys";
 import states from "../../states";
+import movieBg from "../../assets/movie-mosaic.jpg";
 
 const HomePage = () => {
     let navigate = useNavigate();
@@ -56,7 +57,12 @@ const HomePage = () => {
     };
 
     return (
-        <div className="w-screen h-screen bg-home relative z-0">
+        <div className="w-screen h-screen relative z-0">
+            <img
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                src={movieBg}
+                alt="Movie Background"
+            />
             <div className="w-full h-full bg-gray-400 backdrop-filter backdrop-blur-sm bg-opacity-20 absolute top-0 left-0 z-30"></div>
             <div className="relative z-50 w-full h-full flex justify-center">
                 <div className="h-full py-4 flex flex-col justify-between items-center">
