@@ -14,7 +14,7 @@ const HomePage = () => {
 
     const fetchMovie = async (title: string) => {
         const response = await fetch(
-            `http://www.omdbapi.com/?apikey=${
+            `https://www.omdbapi.com/?apikey=${
                 mode == "production"
                     ? OMDb_API_KEY
                     : import.meta.env.VITE_OMDb_API_KEY
