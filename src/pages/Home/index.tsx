@@ -9,11 +9,12 @@ const HomePage = () => {
     let navigate = useNavigate();
     const { search } = useSnapshot(states);
     const [errors, setErrors] = useState<any>();
+    let mode = "production";
 
     const fetchMovie = async (title: string) => {
         const response = await fetch(
             `http://www.omdbapi.com/?apikey=${
-                import.meta.env.VITE_OMDb_API_KEY
+               mode == "production" ? process.env.VITE_OMDb_API_KEY : import.meta.env.VITE_OMDb_API_KEY
             }&t=${title}`
         );
 
