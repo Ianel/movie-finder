@@ -3,7 +3,6 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import { InputGroup } from "../../components/InputGroup";
-import { OMDb_API_KEY } from "../../constants/keys";
 import states from "../../states";
 import movieBg from "../../assets/movie-mosaic.jpg";
 
