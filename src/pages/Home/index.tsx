@@ -11,7 +11,7 @@ const HomePage = () => {
     let navigate = useNavigate();
     const { search } = useSnapshot(states);
     const [errors, setErrors] = useState<any>();
-    let mode = "production";
+    let mode = "development";
 
     const fetchMovie = async (title: string) => {
         const response = await fetch(
